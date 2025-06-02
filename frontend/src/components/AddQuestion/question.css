@@ -1,0 +1,114 @@
+.add-question {
+    display: flex;
+    width: 100%;
+    background-color: rgba(34, 34, 34, 0.8);
+    min-height: 639px;
+    height: auto;
+    justify-content: center;
+}
+
+.add-question-container {
+    padding: 30px 15px;
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    max-width: 800px;
+    background-color: #2b2b2b;
+    border-radius: 8px;
+    height: auto;
+}
+
+.head-title {
+    display: flex;
+    width: 100%;
+}
+
+.head-title>h1 {
+    margin-bottom: 20px;
+    font-weight: 400;
+    font-size: 26px;
+    color: #fff;
+}
+
+.question-container {
+    display: flex;
+    padding: 15px;
+    background-color: #1e1e1e;
+    border: 1px solid #444;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5),
+        0 6px 20px 0 rgba(66, 42, 42, 0.25);
+    border-radius: 8px;
+}
+
+.question-options {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.question-option {
+    flex-direction: column;
+    width: 100%;
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0px;
+    font-size: 0.9rem;
+    color: #ddd;
+}
+
+.title>h3 {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+}
+
+.title>small {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.title>input {
+    margin: 5px 0px;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+    outline: none;
+    background-color: #333;
+    color: #fff;
+}
+
+.quill {
+    height: 100%;
+}
+
+.react-quill {
+    margin: 10px 0;
+    border-radius: 10px;
+    background-color: #adadad;
+    color: #fff;
+}
+
+
+
+.button {
+    max-width: fit-content;
+    margin: 10px 0px;
+}
+
+button {
+    background-color: #222;
+    color: #fff;
+    border: 1px solid #444;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #444;
+}
+
+.tags-input {
+    background-color: black;
+}

@@ -1,0 +1,117 @@
+/* Existing CSS for the sidebar */
+.sidebar {
+    display: flex;
+    padding: 20px 0px 10px 10px;
+    height: 100%;
+    flex: 0.5;
+    max-width: 200px;
+    border-right: 1px solid #ddd;
+    position: relative;
+    /* Add position relative to position the stars */
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+/* The rest of your CSS */
+.sidebar-container {
+    margin: 10px 0;
+    display: flex;
+    width: 100%;
+}
+
+.sidebar-options {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+}
+
+.sidebar-option {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+    font-size: 14px;
+}
+
+.sidebar-option-name {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+    font-size: 14px;
+    flex-direction: row;
+}
+
+.sidebar-option-name>.MuiSvgIcon-root {
+    font-size: 18px;
+    margin-right: 5px;
+    color: rgb(46, 46, 46);
+    animation: fadeInOut 1.5s infinite;
+}
+
+.sidebar-option-name>p {
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 14px;
+}
+
+a {
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+a:hover {
+    color: #000;
+}
+
+.sidebar-option>p {
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 14px;
+}
+
+.link {
+    display: flex;
+    flex-direction: column;
+}
+
+.link-tag {
+    display: flex;
+    align-content: center;
+    padding: 5px 0;
+    width: 100%;
+}
+
+.link-tag:hover {
+    border-left: 3px solid rgb(59, 59, 59);
+}
+
+.link-tag>.MuiSvgIcon-root {
+    font-size: 18px;
+    margin-right: 5px;
+    color: rgba(46, 46, 46);
+    animation: fadeInOut 1.5s infinite;
+}
+
+.tags {
+    display: flex;
+    flex-direction: column;
+    color: rgba(0, 0, 0, 0.5);
+    margin: 0px 20px;
+}
+
+.tags>p {
+    margin: 5px 0;
+}
+
+.tags>p:hover {
+    color: #000;
+}
