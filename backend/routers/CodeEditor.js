@@ -5,6 +5,7 @@ const base64 = require('base-64');
 
 
 const executeCode = async (language, code) => {
+    console.log('Executing code:', language, code);
     const languageMappings = {
         'python': 71,
         'java': 62,
@@ -15,26 +16,40 @@ const executeCode = async (language, code) => {
     const language_id = languageMappings[language];
 
     try {
-        const response = await axios.post('https://judge0-ce.p.rapidapi.com/submissions?base64_encoded=true', {
+        const response = await axios.post('https://judge0-ce.p.rapidapi.com/submissions', {
             source_code,
             language_id
-        }, {
-            headers: {
-                'Content-Type': 'application/json',
-                'X-RapidAPI-Host': 'judge0-ce.p.rapidapi.com',
-                'X-RapidAPI-Key': '090edcf3damsha8b670058409d70p157097jsn8107d76181f0'
-            }
-        });
+        },
+            {
+                params: {
+                    base64_encoded: 'true',
+                    wait: 'false',
+                    fields: '*'
+                },
+                headers: {
+                    'x-rapidapi-key': 'ec95ce2d64msh2d6a9400abc8e7dp158c0cjsn642e736d34b2',
+                    'x-rapidapi-host': 'judge0-ce.p.rapidapi.com',
+                    'Content-Type': 'application/json'
+                }
+            });
 
         const token = response.data.token;
 
-        const resultResponse = await axios.get(`https://judge0-ce.p.rapidapi.com/submissions/${token}?base64_encoded=true`, {
+        const resultResponse = await axios.get(`https://judge0-ce.p.rapidapi.com/submissions/${token}`, {
+            params: {
+                base64_encoded: 'true',
+                fields: '*'
+            },
             headers: {
                 'Content-Type': 'application/json',
-                'X-RapidAPI-Host': 'judge0-ce.p.rapidapi.com',
-                'X-RapidAPI-Key': '090edcf3damsha8b670058409d70p157097jsn8107d76181f0'
+                // 'X-RapidAPI-Host': 'judge0-ce.p.rapidapi.com',
+                'x-rapidapi-ua': 'RapidAPI-Playground',
+                'x-rapidapi-key': 'ec95ce2d64msh2d6a9400abc8e7dp158c0cjsn642e736d34b2',
+                'x-rapidapi-host': 'judge0-ce.p.rapidapi.com'
             }
         });
+        // console.log('resultResponse:', resultResponse.data.stdout);
+        // console.log(base64.decode(resultResponse.data.stdout))
 
         if (resultResponse.data.stdout) {
             return base64.decode(resultResponse.data.stdout);

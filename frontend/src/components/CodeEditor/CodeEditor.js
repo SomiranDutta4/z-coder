@@ -24,7 +24,8 @@ const CodeEditor = () => {
 
     const handleRunCode = async () => {
         try {
-            const response = await axios.post('/api/code/execute', { language, code });
+            console.log(language,'code:',code);
+            const response = await axios.post(process.env.REACT_APP_backendUrl+'/api/code/execute', { language, code });
             setOutput(response.data.output);
         } catch (error) {
             console.error('Error executing code:', error);

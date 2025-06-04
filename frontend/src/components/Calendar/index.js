@@ -11,7 +11,7 @@ function Index() {
 
     useEffect(() => {
         async function getEvents() {
-            await axios.get('/api/contests/codeforces').then((res) => {
+            await axios.get(process.env.REACT_APP_backendUrl+ '/api/contests/codeforces').then((res) => {
                 console.log(res.data);
                 setEvents(res.data.reverse());
             }).catch((err) => {

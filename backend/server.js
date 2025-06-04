@@ -7,7 +7,7 @@ const WebSocket = require('ws');
 const db = require('./db');
 const router = require('./routers');
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 2000;
 
 const app = express();
 const server = http.createServer(app);
