@@ -6,6 +6,7 @@ const http = require('http');
 const WebSocket = require('ws');
 const db = require('./db');
 const router = require('./routers');
+const dotenv=require('dotenv');
 
 const PORT = process.env.PORT || 2000;
 
