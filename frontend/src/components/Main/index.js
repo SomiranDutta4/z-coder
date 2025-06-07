@@ -1,37 +1,33 @@
-import React, { useEffect, useState } from 'react'
-import './index.css'
-import Sidebar from './Sidebar'
-import Main from './Main'
+import React, { useEffect, useState } from 'react';
+import Sidebar from './Sidebar';
+import Main from './Main';
 import axios from 'axios';
 
-
-function Index() {
+function Index({currentUserId}) {
 
   const [questions, setQuestions] = useState([]);
 
   useEffect(() => {
     async function getQuestion() {
-      await axios.get('/api/question').then((res) => {
-        console.log(res.data);
+      try {
+        const res = await axios.get(process.env.REACT_APP_backendUrl + '/api/question');
         setQuestions(res.data.reverse());
-      }).catch((err) => {
-        console.log(err);
-      })
+      } catch (err) {
+        console.error(err);
+      }
     }
     getQuestion();
-  }, [])
-
-
+  }, []);
 
   return (
-    <div className='stack-index'>
+    <div className="stack-index flex h-[91vh]">
+      {/* Sidebar with variable width */}
+      <Sidebar />
 
-      <div className='stack-index-content'>
-        <Sidebar />
-        <Main questions={questions} />
-      </div>
+      {/* Main takes remaining space */}
+      <Main questions={questions} currentUserId={currentUserId}/>
     </div>
-  )
+  );
 }
 
-export default Index
+export default Index;

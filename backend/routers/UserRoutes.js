@@ -1,6 +1,7 @@
 const express = require('express');
 const User = require('../models/User');
 const router = express.Router();
+const Questions = require('../models/Question');  // adjust path as needed
 
 router.post('/create', async (req, res) => {
 
@@ -60,6 +61,26 @@ router.put('/update', async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
+
+
+// GET /api/questions/user/:uid
+router.get('/questions/:uid', async (req, res) => {
+    console.log(req.params)
+    const { uid } = req.params;
+
+    try {
+        // Find all questions where user.uid matches param uid
+        const questions = await Questions.find({ 'user.uid': uid })
+            .sort({ created_at: -1 }); // newest first
+
+        res.status(200).json(questions);
+    } catch (error) {
+        console.error('Error fetching user questions:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+module.exports = router;
 
 
 module.exports = router;

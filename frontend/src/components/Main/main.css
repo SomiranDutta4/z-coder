@@ -103,3 +103,16 @@ button:hover {
         flex: 0.6;
     }
 }
+/* If you want, but Tailwind can handle layout mostly */
+
+.stack-index {
+  /* full screen height, flex container */
+  height: 100vh;
+  display: flex;
+  background-color: #f9fafb; /* light gray */
+}
+
+.stack-index-content {
+  flex-grow: 1;
+  display: flex;
+}

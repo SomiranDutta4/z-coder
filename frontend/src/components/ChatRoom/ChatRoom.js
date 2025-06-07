@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import './ChatRoom.css';
 import { selectUser } from '../../features/userSlice';
 import { useSelector } from 'react-redux';
 
@@ -8,22 +7,21 @@ const ChatRoom = () => {
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState('');
     const ws = useRef(null);
+    const bottomRef = useRef(null);
 
     useEffect(() => {
-        // Connect to WebSocket server
-        ws.current = new WebSocket('ws://localhost:80');
-
-        // Handle incoming messages
+        // ws.current = new WebSocket('ws://localhost:80');
+        ws.current = new WebSocket(process.env.REACT_APP_backendUrl);
         ws.current.onmessage = (event) => {
             const message = JSON.parse(event.data);
-            setMessages((prevMessages) => [...prevMessages, message]);
+            setMessages((prev) => [...prev, message]);
         };
-
-        // Clean up WebSocket connection
-        return () => {
-            ws.current.close();
-        };
+        return () => ws.current.close();
     }, []);
+
+    useEffect(() => {
+        bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }, [messages]);
 
     const sendMessage = () => {
         if (input.trim()) {
@@ -33,46 +31,57 @@ const ChatRoom = () => {
         }
     };
 
-    const handleKeyDown = (event) => {
-        if (event.key === 'Enter') {
-            sendMessage();
-        }
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') sendMessage();
     };
 
     return (
-        <div className="chat-room">
-            <div className='rules'>
-                <p>
-                    RULES TO FOLLOW IN THIS CHAT ROOM
-                </p>
-                <span>1. Be civil and courteuos</span>
-                <span>2. Do not spam messages</span>
-                <span>3. Ask coding related questions only</span>
-                <span>4. Violators will banned permanently</span>
+        <div className="flex flex-col items-center min-h-[600px] bg-[#121212] text-[#e0e0e0] font-sans py-6 px-4">
+            <div className="flex flex-col w-full max-w-xl mb-6">
+                <p className="text-lg font-semibold mb-2">RULES TO FOLLOW IN THIS CHAT ROOM</p>
+                <span className="text-sm">1. Be civil and courteous</span>
+                <span className="text-sm">2. Do not spam messages</span>
+                <span className="text-sm">3. Ask coding related questions only</span>
+                <span className="text-sm">4. Violators will be banned permanently</span>
             </div>
-            <div className="messages">
+
+            <div className="w-full max-w-xl h-[300px] overflow-y-scroll bg-[#1e1e1e] border border-[#333] rounded-lg p-4 mb-6 space-y-2">
                 {messages.map((msg, index) => (
                     <div key={index}>
-                        <strong>{msg.sender}:</strong> {msg.text}
+                        <strong className="text-[#6200ea]">{msg.sender}:</strong> <span>{msg.text}</span>
                     </div>
                 ))}
+                <div ref={bottomRef}></div>
             </div>
-            <div className="input-container">
+
+            <div className="w-full max-w-xl flex mb-6">
                 <input
                     type="text"
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     onKeyDown={handleKeyDown}
+                    className="flex-1 bg-[#1e1e1e] border border-[#333] text-[#e0e0e0] rounded-lg px-4 py-2 outline-none"
+                    placeholder="Type your message..."
                 />
-                <button onClick={sendMessage}>Send</button>
+                <button
+                    onClick={sendMessage}
+                    className="ml-3 px-5 py-2 rounded-lg bg-[#6200ea] hover:bg-[#4b00b5] text-white transition-colors"
+                >
+                    Send
+                </button>
             </div>
-            <div className='points'>
-                <p>
-                    Points to Remember
-                </p>
-                <span>1. History is not saved, i.e. as soon as you leave chat room, all your messages will be deleted</span>
-                <span>2. Press enter or click send button to send messages</span>
-                <span>3. Respect every user's privacy</span>
+
+            <div className="flex flex-col items-center w-full max-w-xl">
+                <p className="text-lg font-semibold mb-2">Points to Remember</p>
+                <span className="text-sm text-center">
+                    1. History is not saved, i.e. as soon as you leave the chat room, all your messages will be deleted
+                </span>
+                <span className="text-sm text-center">
+                    2. Press enter or click send button to send messages
+                </span>
+                <span className="text-sm text-center">
+                    3. Respect every user's privacy
+                </span>
             </div>
         </div>
     );

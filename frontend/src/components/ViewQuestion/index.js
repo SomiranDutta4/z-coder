@@ -1,18 +1,21 @@
-import React from 'react'
-import '../Main/index.css'
-import Sidebar from '../Main/Sidebar'
-import MainQuestion from './MainQuestion'
+import React from 'react';
+import Sidebar from '../Main/Sidebar';
+import MainQuestion from './MainQuestion';
 
+function Index() {
+  return (
+    <div className="flex h-[91vh] bg-[#1e1e2f] text-white">
+      {/* Sidebar (fixed width) */}
+      <div className="w-64">
+        <Sidebar />
+      </div>
 
-function index() {
-    return (
-        <div className='stack-index'>
-            <div className='stack-index-content'>
-                <Sidebar />
-                <MainQuestion />
-            </div>
-        </div>
-    )
+      {/* Main content (flex grows) */}
+      <div className="flex-1 p-6 overflow-y-auto">
+        <MainQuestion />
+      </div>
+    </div>
+  );
 }
 
-export default index
+export default Index;

@@ -111,6 +111,7 @@ router.get('/:id', async (req, res) => {
                                 answer: 1,
                                 question_id: 1,
                                 created_at: 1,
+                                votes: 1  // ← include the votes map here
                             },
                         },
                     ],
@@ -163,5 +164,44 @@ router.get('/:id', async (req, res) => {
         });
     }
 })
+
+router.post('/:id/vote', async (req, res) => {
+    const { userId, voteType } = req.body; // voteType: 1 = upvote, -1 = downvote
+
+    if (![1, -1].includes(voteType)) {
+        return res.status(400).json({ message: 'Invalid vote type' });
+    }
+
+    try {
+        const question = await QuestionDB.findById(req.params.id);
+        if (!question) {
+            return res.status(404).json({ message: 'Question not found' });
+        }
+
+        const currentVote = question.votes.get(userId);
+
+        if (currentVote === voteType) {
+            question.votes.delete(userId); // toggle vote off
+        } else {
+            question.votes.set(userId, voteType); // set or switch
+        }
+
+        await question.save();
+
+        // Calculate total votes (no negatives)
+        let totalVotes = Array.from(question.votes.values()).reduce((sum, val) => sum + val, 0);
+        totalVotes = Math.max(0, totalVotes);
+
+        res.status(200).json({
+            message: 'Vote updated successfully',
+            totalVotes,
+            votes: Object.fromEntries(question.votes),
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error while voting' });
+    }
+});
+
 
 module.exports = router;

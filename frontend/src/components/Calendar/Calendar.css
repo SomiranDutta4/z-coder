@@ -1,96 +1,198 @@
+/* Minimal dark background container */
 .calendar-home {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
-    height: 640px;
-    background-color: rgba(34, 34, 34, 0.8);
-}
-
-.calendar-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #2b2b2b;
-    border-radius: 10px;
+    min-height: 640px;
+    padding: 40px 20px;
+    /* background-color: #121212; */
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+        Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: #ddd;
 }
 
 .react-calendar {
-    max-width: 800px;
     width: 100%;
-    height: 320px;
-    background: rgb(21, 50, 59);
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    font-weight: bold;
+    max-width: 850px;
+    /* Remove fixed height */
+    min-height: 350px;
+    /* Optional: ensure minimum space */
+    /* height: 350px;  <-- remove this */
+    background-color: #2a2a2a;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    color: #ccc;
+    user-select: none;
+    box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.05);
+    padding-bottom: 10px;
+    /* add some padding at bottom */
+    box-sizing: border-box;
+    /* important to include padding in size */
 }
 
+/* Also ensure container can expand and not crop */
+.calendar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 850px;
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    padding: 30px 40px 40px 40px;
+    /* extra bottom padding */
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.7);
+    box-sizing: border-box;
+}
+
+
+/* Calendar container card */
+/* .calendar-container { */
+/* display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 850px;
+  background-color: #1e1e1e;
+  border-radius: 10px;
+  padding: 30px 40px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.7);
+} */
+
+/* React calendar base */
+/* .react-calendar {
+  width: 100%;
+  max-width: 850px;
+  height: 350px;
+  background-color: #2a2a2a;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  color: #ccc;
+  user-select: none;
+  box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.05);
+} */
+
+/* Selected date style */
+.react-calendar__tile--active {
+    background-color: #444444 !important;
+    color: #eee !important;
+    font-weight: 700;
+    border-radius: 6px;
+    box-shadow: none !important;
+}
+
+/* Tile hover effect */
+.react-calendar__tile:hover:not(.react-calendar__tile--active) {
+    background-color: #3a3a3a;
+    color: #eee;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+/* Weekdays header */
+.react-calendar__month-view__weekdays {
+    background-color: #222222;
+    border-radius: 10px 10px 0 0;
+    font-weight: 600;
+    color: #888;
+    user-select: none;
+}
+
+.react-calendar__month-view__weekdays__weekday {
+    padding: 10px 0;
+    font-size: 0.9rem;
+}
+
+/* Navigation bar */
+.react-calendar__navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.react-calendar__navigation__label {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #bbb;
+    user-select: none;
+}
+/* Subtle, plain styling for today's date */
+.react-calendar__tile--now {
+  background: #251919 !important;  /* muted dark grey */
+  color: #ccc !important;          /* light grey text */
+  font-weight: 600;
+  border-radius: 6px;
+  box-shadow: none !important;
+}
+
+.react-calendar__navigation__arrow {
+    cursor: pointer;
+    color: #666;
+    font-size: 1.3rem;
+    padding: 4px 10px;
+    border-radius: 6px;
+    transition: background-color 0.15s ease;
+}
+
+.react-calendar__navigation__arrow:hover {
+    background-color: #3a3a3a;
+    color: #ddd;
+}
+
+/* Small event dot */
 .event-dot {
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
-    background-color: #07ff35;
-    margin: 0 auto;
+    background-color: #888;
+    margin: 4px auto 0 auto;
+    box-shadow: none;
 }
 
-
+/* Event list panel */
 .event-list {
-    flex: 1;
-    margin-left: 20px;
-    padding: 10px;
-    background-color: rgb(0, 80, 146);
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 22px;
+    width: 100%;
+    max-height: 260px;
+    background-color: #232323;
+    border-radius: 10px;
+    padding: 18px 24px;
     overflow-y: auto;
+    color: #ccc;
+    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.04);
+    font-size: 0.95rem;
 }
 
+/* Each event item */
 .event-item {
-    margin-bottom: 10px;
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
+    padding: 14px 10px;
+    border-bottom: 1px solid #3a3a3a;
+    transition: background-color 0.15s ease;
+}
+
+.event-item:last-child {
+    border-bottom: none;
+}
+
+.event-item:hover {
+    background-color: #333333;
+    cursor: pointer;
 }
 
 .event-item h3 {
-    margin: 0 0 5px;
-    color: #cbcbcb;
-    font-weight: bold;
+    margin: 0 0 6px 0;
+    color: #ddd;
+    font-weight: 600;
+    font-size: 1.1rem;
 }
 
 .event-item p {
     margin: 0;
-    color: #ffffff;
-    font-weight: bold;
-}
-
-/* Style for the selected date in the calendar */
-.react-calendar__tile--active {
-    background-color: #004c9d !important;
-    color: white !important;
-    font-weight: bold;
-}
-
-.react-calendar__month-view__weekdays__weekday abbr {
-    color: white;
-}
-
-/* Style for the navigation buttons */
-.react-calendar__navigation__label,
-.react-calendar__navigation__arrow {
-    font-size: 1.2em;
-    color: #7eb6f2;
-    font-weight: bold;
-}
-
-/* Style for the navigation buttons on hover */
-.react-calendar__navigation__arrow:hover {
-    cursor: pointer;
-    opacity: 0.8;
-    font-weight: bold;
+    font-weight: 400;
+    color: #bbb;
 }
