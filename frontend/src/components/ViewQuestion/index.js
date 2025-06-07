@@ -4,7 +4,7 @@ import MainQuestion from './MainQuestion';
 
 function Index() {
   return (
-    <div className="flex h-[91vh] bg-[#1e1e2f] text-white">
+    <div className="flex h-[91vh] text-white">
       {/* Sidebar (fixed width) */}
       <div className="w-64">
         <Sidebar />

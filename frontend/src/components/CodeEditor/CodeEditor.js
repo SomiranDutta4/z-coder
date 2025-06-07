@@ -34,7 +34,7 @@ const CodeEditor = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-900 p-6">
+    <div className="lg:h-[91vh] flex items-center justify-center bg-gray-900 p-6">
       <div className="flex flex-col lg:flex-row gap-6 rounded-md shadow-lg max-w-full mx-auto w-full max-w-7xl min-h-[600px]">
         {/* Editor & Controls */}
         <div className="flex flex-col w-full lg:w-1/2">

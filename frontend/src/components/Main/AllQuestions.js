@@ -29,7 +29,7 @@ function AllQuestions({ question, currentUserId }) {
   }
 
   return (
-    <div className="w-full p-5 bg-gray-900 rounded-xl shadow-lg mb-5 border border-gray-700 hover:border-blue-600 transition">
+    <div className="w-full p-5 rounded-xl shadow-lg mb-5 border border-gray-700 hover:border-blue-600 transition">
       <div className="flex justify-between w-full">
         {/* Voting Section */}
         <div className="flex flex-col items-center mr-8 text-gray-400 text-sm font-semibold select-none">

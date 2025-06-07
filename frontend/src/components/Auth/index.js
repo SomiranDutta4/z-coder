@@ -82,7 +82,7 @@ function Index() {
   };
 
   return (
-    <div className="min-h-full flex items-center justify-center bg-gradient-to-br from-black via-gray-900 to-black text-white px-4">
+    <div className="h-[91vh] flex items-center justify-center bg-gradient-to-br from-black via-gray-900 to-black text-white px-4">
       <div className="w-full max-w-md bg-[#121212] rounded-2xl shadow-2xl p-8 animate-fadeIn">
         <div className="flex flex-col items-center mb-6">
           <img src="/uploads/z-logo.png" alt="Project Logo" className="w-32 h-auto mb-4" />

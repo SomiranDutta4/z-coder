@@ -36,7 +36,7 @@ const ChatRoom = () => {
     };
 
     return (
-        <div className="flex flex-col items-center min-h-[600px] bg-[#121212] text-[#e0e0e0] font-sans py-6 px-4">
+        <div className="flex flex-col items-center h-[91vh] bg-[#121212] text-[#e0e0e0] font-sans py-6 px-4">
             <div className="flex flex-col w-full max-w-xl mb-6">
                 <p className="text-lg font-semibold mb-2">RULES TO FOLLOW IN THIS CHAT ROOM</p>
                 <span className="text-sm">1. Be civil and courteous</span>

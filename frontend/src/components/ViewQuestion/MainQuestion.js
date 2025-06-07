@@ -123,7 +123,7 @@ function MainQuestion() {
     const parseHtml = (html) => (typeof html === 'string' ? ReactHtmlParser(html) : null);
 
     return (
-        <div className="h-full bg-[#1e1e2f] text-white px-6 py-10">
+        <div className="h-full text-white px-6 py-10">
             <div className="max-w-5xl mx-auto space-y-10">
                 {/* Title and Vote */}
                 <div className="flex flex-col sm:flex-row justify-between gap-6 sm:items-center">
@@ -142,7 +142,7 @@ function MainQuestion() {
                 </div>
 
                 {/* Question Box */}
-                <div className="bg-[#262636] rounded-lg p-6 flex gap-6 border border-gray-700">
+                <div className="bg-[#0a0a0d] rounded-lg p-6 flex gap-6 border border-gray-700">
                     <div className="flex flex-col items-center text-gray-400">
                         <KeyboardDoubleArrowUpIcon
                             onClick={() => handleQuestionVote(1)}
@@ -254,7 +254,7 @@ function MainQuestion() {
                         value={answer}
                         onChange={handleQuill}
                         theme="snow"
-                        className="bg-white rounded-md"
+                        className="bg-[#b2b2b2] rounded-md"
                         style={{
                             color: '#000',
                             minHeight: '150px',
