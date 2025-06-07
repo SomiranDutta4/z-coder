@@ -1,4 +1,4 @@
-:root {
+/* :root {
     --background-color: #121212;
     --secondary-background-color: #1e1e1e;
     --border-color: #333;
@@ -74,4 +74,4 @@
 
 .input-container button:hover {
     background-color: darken(var(--accent-color), 10%);
-}
+} */
