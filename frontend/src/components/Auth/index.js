@@ -20,7 +20,7 @@ function Index() {
 
   const createUser = async (user) => {
     try {
-      await axios.post(process.env.REACT_APP_backendUrl+'/api/users/create', {
+      await axios.post(process.env.REACT_APP_backendUrl + '/api/users/create', {
         uid: user.uid,
         bio: 'No current bio',
       });
@@ -85,7 +85,7 @@ function Index() {
     <div className="min-h-full flex items-center justify-center bg-gradient-to-br from-black via-gray-900 to-black text-white px-4">
       <div className="w-full max-w-md bg-[#121212] rounded-2xl shadow-2xl p-8 animate-fadeIn">
         <div className="flex flex-col items-center mb-6">
-          <img src="/uploads/Zcoder-logo.png" alt="Project Logo" className="w-40 mb-4" />
+          <img src="/uploads/z-logo.png" alt="Project Logo" className="w-32 h-auto mb-4" />
           <p className="text-center text-lg text-gray-300 font-light">
             One Stop Destination for All Your Coding Needs
           </p>

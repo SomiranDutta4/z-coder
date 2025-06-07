@@ -1,4 +1,4 @@
-/* Minimal dark background container */
+/* Base container */
 .calendar-home {
     display: flex;
     flex-direction: column;
@@ -6,99 +6,64 @@
     width: 100%;
     min-height: 640px;
     padding: 40px 20px;
-    /* background-color: #121212; */
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
         Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    color: #ddd;
+    color: #dbeafe; /* Light indigo-blue text */
+    background-color: #0f172a; /* Dark indigo slate */
 }
 
-.react-calendar {
-    width: 100%;
-    max-width: 850px;
-    /* Remove fixed height */
-    min-height: 350px;
-    /* Optional: ensure minimum space */
-    /* height: 350px;  <-- remove this */
-    background-color: #2a2a2a;
-    border: none;
-    border-radius: 10px;
-    font-weight: 600;
-    color: #ccc;
-    user-select: none;
-    box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.05);
-    padding-bottom: 10px;
-    /* add some padding at bottom */
-    box-sizing: border-box;
-    /* important to include padding in size */
-}
-
-/* Also ensure container can expand and not crop */
+/* Calendar section card */
 .calendar-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
     max-width: 850px;
-    background-color: #1e1e1e;
-    border-radius: 10px;
-    padding: 30px 40px 40px 40px;
-    /* extra bottom padding */
-    box-shadow: 0 0 12px rgba(0, 0, 0, 0.7);
+    background-color: #1e293b; /* Indigo-900 */
+    border-radius: 12px;
+    padding: 30px 40px 40px;
+    box-shadow: 0 0 18px rgba(15, 23, 42, 0.7);
     box-sizing: border-box;
 }
 
-
-/* Calendar container card */
-/* .calendar-container { */
-/* display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  max-width: 850px;
-  background-color: #1e1e1e;
-  border-radius: 10px;
-  padding: 30px 40px;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.7);
-} */
-
 /* React calendar base */
-/* .react-calendar {
-  width: 100%;
-  max-width: 850px;
-  height: 350px;
-  background-color: #2a2a2a;
-  border: none;
-  border-radius: 10px;
-  font-weight: 600;
-  color: #ccc;
-  user-select: none;
-  box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.05);
-} */
-
-/* Selected date style */
-.react-calendar__tile--active {
-    background-color: #444444 !important;
-    color: #eee !important;
-    font-weight: 700;
-    border-radius: 6px;
-    box-shadow: none !important;
+.react-calendar {
+    width: 100%;
+    max-width: 850px;
+    min-height: 350px;
+    background-color: #0f172a;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    color: #c7d2fe; /* light indigo-blue */
+    user-select: none;
+    box-shadow: inset 0 0 10px rgba(99, 102, 241, 0.1); /* indigo shadow */
+    padding-bottom: 10px;
 }
 
-/* Tile hover effect */
+/* Selected date */
+.react-calendar__tile--active {
+    background-color: #4338ca !important; /* indigo-700 */
+    color: #fff !important;
+    font-weight: 700;
+    border-radius: 6px;
+}
+
+/* Hover on dates */
 .react-calendar__tile:hover:not(.react-calendar__tile--active) {
-    background-color: #3a3a3a;
-    color: #eee;
+    background-color: #334155;
+    color: #e0e7ff;
     border-radius: 6px;
     cursor: pointer;
     transition: background-color 0.2s ease;
 }
 
-/* Weekdays header */
+/* Weekday labels */
 .react-calendar__month-view__weekdays {
-    background-color: #222222;
+    background-color: #1e293b;
     border-radius: 10px 10px 0 0;
     font-weight: 600;
-    color: #888;
+    color: #93c5fd;
     user-select: none;
 }
 
@@ -107,7 +72,7 @@
     font-size: 0.9rem;
 }
 
-/* Navigation bar */
+/* Navigation */
 .react-calendar__navigation {
     display: flex;
     justify-content: space-between;
@@ -118,21 +83,13 @@
 .react-calendar__navigation__label {
     font-weight: 600;
     font-size: 1.1rem;
-    color: #bbb;
+    color: #bfdbfe;
     user-select: none;
-}
-/* Subtle, plain styling for today's date */
-.react-calendar__tile--now {
-  background: #251919 !important;  /* muted dark grey */
-  color: #ccc !important;          /* light grey text */
-  font-weight: 600;
-  border-radius: 6px;
-  box-shadow: none !important;
 }
 
 .react-calendar__navigation__arrow {
     cursor: pointer;
-    color: #666;
+    color: #60a5fa;
     font-size: 1.3rem;
     padding: 4px 10px;
     border-radius: 6px;
@@ -140,18 +97,25 @@
 }
 
 .react-calendar__navigation__arrow:hover {
-    background-color: #3a3a3a;
-    color: #ddd;
+    background-color: #1e40af;
+    color: #fff;
 }
 
-/* Small event dot */
+/* Today’s tile */
+.react-calendar__tile--now {
+    background: #1e40af !important;
+    color: #c7d2fe !important;
+    font-weight: 600;
+    border-radius: 6px;
+}
+
+/* Dot for event */
 .event-dot {
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background-color: #888;
+    background-color: #818cf8; /* indigo-400 */
     margin: 4px auto 0 auto;
-    box-shadow: none;
 }
 
 /* Event list panel */
@@ -159,19 +123,19 @@
     margin-top: 22px;
     width: 100%;
     max-height: 260px;
-    background-color: #232323;
+    background-color: #1e293b;
     border-radius: 10px;
     padding: 18px 24px;
     overflow-y: auto;
-    color: #ccc;
-    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.04);
+    color: #cbd5e1;
+    box-shadow: inset 0 0 10px rgba(30, 58, 138, 0.1);
     font-size: 0.95rem;
 }
 
-/* Each event item */
+/* Event item cards */
 .event-item {
     padding: 14px 10px;
-    border-bottom: 1px solid #3a3a3a;
+    border-bottom: 1px solid #334155;
     transition: background-color 0.15s ease;
 }
 
@@ -180,13 +144,13 @@
 }
 
 .event-item:hover {
-    background-color: #333333;
+    background-color: #475569;
     cursor: pointer;
 }
 
 .event-item h3 {
     margin: 0 0 6px 0;
-    color: #ddd;
+    color: #e0e7ff;
     font-weight: 600;
     font-size: 1.1rem;
 }
@@ -194,5 +158,5 @@
 .event-item p {
     margin: 0;
     font-weight: 400;
-    color: #bbb;
+    color: #a5b4fc; /* lighter indigo text */
 }

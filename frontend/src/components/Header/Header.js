@@ -16,7 +16,12 @@ function Header() {
                 {/* Left section */}
                 <div className="flex items-center space-x-5">
                     <p onClick={() => navigate('/')} className="cursor-pointer">
-                        <img src="/uploads/zcoder_smaller.png" alt="Logo" className="h-10" />
+                        <img
+                            src="/uploads/z-logo.png"
+                            alt="Z-coder Logo"
+                            className="h-10 w-auto"
+                            style={{ maxHeight: '40px' }}
+                        />
                     </p>
                     <h3
                         onClick={() => navigate('/')}
