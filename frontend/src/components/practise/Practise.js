@@ -50,30 +50,28 @@ const Practise = () => {
 
 
     useEffect(() => {
-        if (activeTab === 'DSA') {
+        if (activeTab === 'DSA' && !selectedCompany) {
             fetchQuestions(1, false);
         }
-    }, [activeTab, selectedTags]);
+    }, [activeTab, selectedTags, selectedCompany]);
 
     const handleCompanyToggle = async (company) => {
-        if (selectedCompany === company) {
-            setSelectedCompany(null);
-            return;
-        }
-        setSelectedCompany(company)
-    };
 
-    const setcompanyfilter = async () => {
+        const isUnselecting = selectedCompany === company;
+        const newCompany = isUnselecting ? null : company;
+
+        setSelectedCompany(newCompany);
         setShowCompanyFilter(false);
+        setSelectedTags([]); // clear topic filters
 
-        if (!selectedCompany) {
-            setDsaData([])
+        if (!newCompany) {
+            // no company selected — revert to LeetCode data
             fetchQuestions(1, false);
             return;
         }
 
         try {
-            const filePath = `/leetcode-companies/${selectedCompany}/5. All.csv`;
+            const filePath = `/leetcode-companies/${newCompany}/5. All.csv`;
             const response = await fetch(filePath);
             const csvText = await response.text();
             const data = Papa.parse(csvText, {
@@ -86,6 +84,38 @@ const Practise = () => {
             setDsaData([]);
         }
     };
+
+    // const handleCompanyToggle = async (company) => {
+    //     if (selectedCompany === company) {
+    //         setSelectedCompany(null);
+    //         return;
+    //     }
+    //     setSelectedCompany(company)
+    // };
+
+    // const setcompanyfilter = async () => {
+    //     setShowCompanyFilter(false);
+
+    //     if (!selectedCompany) {
+    //         setDsaData([])
+    //         fetchQuestions(1, false);
+    //         return;
+    //     }
+
+    //     try {
+    //         const filePath = `/leetcode-companies/${selectedCompany}/5. All.csv`;
+    //         const response = await fetch(filePath);
+    //         const csvText = await response.text();
+    //         const data = Papa.parse(csvText, {
+    //             header: true,
+    //             skipEmptyLines: true,
+    //         });
+    //         setDsaData(data.data);
+    //     } catch (error) {
+    //         console.error('Failed to load CSV:', error);
+    //         setDsaData([]);
+    //     }
+    // };
 
 
 
@@ -159,6 +189,11 @@ const Practise = () => {
         loadBookmarks();
     }, [user?.uid, bookmarksFromRedux.length]);
 
+    useEffect(() => {
+        if (selectedCompany && showFilterSidebar) {
+            setShowFilterSidebar(false);
+        }
+    }, [selectedCompany, showFilterSidebar]);
 
     return (
         <div className="w-full max-w-5xl mx-auto px-3 py-4 text-white font-inter relative">
@@ -213,12 +248,15 @@ const Practise = () => {
                         </button>
                         {!showingBookmarked && (
                             <>
-                                <button
-                                    onClick={() => setShowFilterSidebar(true)}
-                                    className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-md text-sm"
-                                >
-                                    Filter Topics
-                                </button>
+                                {!selectedCompany && (
+                                    <button
+                                        onClick={() => setShowFilterSidebar(true)}
+                                        className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-md text-sm"
+                                    >
+                                        Filter Topics
+                                    </button>
+                                )}
+
                                 <button
                                     onClick={() => setShowCompanyFilter(true)}
                                     className="bg-green-600 hover:bg-green-700 text-white px-3 py-1.5 rounded-md text-sm"
@@ -353,7 +391,7 @@ const Practise = () => {
 
                         <div className="p-4 border-t border-gray-700">
                             <button
-                                onClick={setcompanyfilter}
+                                onClick={() => { setShowCompanyFilter(false) }}
                                 className="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg"
                             >
                                 Apply Filters
