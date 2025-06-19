@@ -73,7 +73,7 @@ const Practise = () => {
         }
 
         try {
-            const filePath = `/leetcode-company-wise-problems/${selectedCompany}/5. All.csv`;
+            const filePath = `/leetcode-companies/${selectedCompany}/5. All.csv`;
             const response = await fetch(filePath);
             const csvText = await response.text();
             const data = Papa.parse(csvText, {
