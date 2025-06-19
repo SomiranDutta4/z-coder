@@ -11,7 +11,7 @@ import { auth } from '../../firebase';
 function Sidebar() {
   const handleSignOut = () => {
     signOut(auth)
-      .then(() => {})
+      .then(() => { })
       .catch((error) => {
         console.error("Error signing out:", error);
       });
@@ -42,7 +42,15 @@ function Sidebar() {
               to="/"
               className="block px-3 py-2 rounded hover:bg-gray-700 hover:text-white transition-colors duration-200"
             >
-              All Questions
+              Community
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/practise"
+              className="block px-3 py-2 rounded hover:bg-gray-700 hover:text-white transition-colors duration-200"
+            >
+              Practise
             </Link>
           </li>
           <li>

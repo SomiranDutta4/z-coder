@@ -4,6 +4,7 @@ const router = express.Router();
 const Questions = require('../models/Question');  // adjust path as needed
 
 router.post('/create', async (req, res) => {
+    console.log("Creating user");
 
     const uid = req.body.uid;
     const bio = req.body.bio;
@@ -14,6 +15,7 @@ router.post('/create', async (req, res) => {
         const userData = new User({
             uid: uid,
             bio: bio,
+            bookmarks:[]
         })
 
         await userData.save().then((doc) => {
@@ -79,8 +81,5 @@ router.get('/questions/:uid', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
-
-module.exports = router;
-
 
 module.exports = router;

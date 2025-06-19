@@ -8,16 +8,18 @@ import ViewQuestion from './components/ViewQuestion';
 import Auth from './components/Auth';
 import { login, logout, selectUser } from './features/userSlice';
 import { useSelector, useDispatch } from 'react-redux';
+import { setBookmarks } from './features/bookmarkSlice';
 import { auth } from './firebase';
 import Calendar from './components/Calendar';
 import Profile from './components/Profile/Profile';
 import CodeEditor from './components/CodeEditor/CodeEditor';
 import ChatRoom from './components/ChatRoom/ChatRoom';
 import UserQuestions from './components/Profile/UserQuestions';
+import Practise from './components/practise/Practise';
+import axios from 'axios';
 
 function PrivateRoute({ children, authLoading }) {
   const user = useSelector(selectUser);
-
   if (authLoading) return null; // Or return <LoadingSpinner />
   return user ? children : <Navigate to="/auth" replace />;
 }
@@ -25,23 +27,32 @@ function PrivateRoute({ children, authLoading }) {
 function App() {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  const [authLoading, setAuthLoading] = useState(true); // <-- track auth load state
+  const [authLoading, setAuthLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((authUser) => {
+    const unsubscribe = auth.onAuthStateChanged(async (authUser) => {
       if (authUser) {
-        dispatch(
-          login({
-            uid: authUser.uid,
-            photo: authUser.photoURL,
-            displayName: authUser.displayName,
-            email: authUser.email,
-          })
-        );
+        const loggedInUser = {
+          uid: authUser.uid,
+          photo: authUser.photoURL,
+          displayName: authUser.displayName,
+          email: authUser.email,
+        };
+
+        dispatch(login(loggedInUser));
+
+        try {
+          const res = await axios.get(
+            `${process.env.REACT_APP_backendUrl}/api/practise/bookmarks/all?uid=${authUser.uid}`
+          );
+          dispatch(setBookmarks(res.data));
+        } catch (err) {
+          console.error('Failed to fetch bookmarks:', err);
+        }
       } else {
         dispatch(logout());
       }
-      setAuthLoading(false); // <-- auth check done
+      setAuthLoading(false);
     });
 
     return () => unsubscribe();
@@ -54,6 +65,7 @@ function App() {
         <Routes>
           <Route path="/auth" element={<Auth />} />
           <Route path="/" element={<PrivateRoute authLoading={authLoading}><Main currentUserId={user?.uid} /></PrivateRoute>} />
+          <Route path="/practise" element={<PrivateRoute authLoading={authLoading}><Practise /></PrivateRoute>} />
           <Route path="/add-question" element={<PrivateRoute authLoading={authLoading}><Question /></PrivateRoute>} />
           <Route path="/question" element={<PrivateRoute authLoading={authLoading}><ViewQuestion /></PrivateRoute>} />
           <Route path="/calendar" element={<PrivateRoute authLoading={authLoading}><Calendar /></PrivateRoute>} />

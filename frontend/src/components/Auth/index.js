@@ -53,7 +53,9 @@ function Index() {
       return;
     }
     createUserWithEmailAndPassword(auth, email, password)
-      .then(() => {
+      .then((res) => {
+        const user = res.user;
+        createUser(user); // <-- call your backend to create user in MongoDB
         navigate('/');
       })
       .catch((error) => {
